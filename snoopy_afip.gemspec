@@ -1,65 +1,29 @@
 # -*- encoding: utf-8 -*-
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'snoopy_afip/version'
 
 Gem::Specification.new do |s|
   s.name = "snoopy_afip"
-  s.version = "1.0.0"
+  s.version = Snoopy::VERSION
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Leandro Marcucci"]
-  s.date = "2011-03-21"
-  s.description = "Adaptador para el Web Service de Facturacion Electronica de AFIP"
-  s.email = "leanucci@vurbia.com"
+  s.authors = ["g.edera"]
+  s.date = "2017-06-29"
+  s.description = "Adaptador para Web Service de Facturación Electrónica Argentina (AFIP)"
+  s.email = ["gab.edera@gmail.com"]
   s.extra_rdoc_files = ["LICENSE.txt", "README.textile"]
-  s.files = [".document", "CHANGELOG", "Gemfile", "Gemfile.lock", "LICENSE.txt", "README.textile", "Rakefile", "VERSION", "autotest/discover.rb", "snoopy_afip.gemspec", "lib/snoopy_afip.rb", "lib/snoopy_afip/auth_data.rb", "lib/snoopy_afip/authorizer.rb", "lib/snoopy_afip/bill.rb", "lib/snoopy_afip/constants.rb", "lib/snoopy_afip/core_ext/float.rb", "lib/snoopy_afip/core_ext/hash.rb", "lib/snoopy_afip/core_ext/string.rb", "lib/snoopy_afip/version.rb", "spec/snoopy_afip/auth_data_spec.rb", "spec/snoopy_afip/authorizer_spec.rb", "spec/snoopy_afip/bill_spec.rb", "spec/spec_helper.rb", "wsaa-client.sh"]
-  s.homepage = "https://github.com/enriserdio/snoopy_afip"
+  s.files = [".document", "CHANGELOG", "Gemfile", "Gemfile.lock", "LICENSE.txt", "README.textile", "Rakefile", "VERSION", "autotest/discover.rb", "snoopy_afip.gemspec", "lib/snoopy_afip.rb", "lib/snoopy_afip/authentication_adapter.rb", "lib/snoopy_afip/authorize_adapter.rb", "lib/snoopy_afip/bill.rb", "lib/snoopy_afip/client.rb", "lib/snoopy_afip/constants.rb", "lib/snoopy_afip/core_ext/float.rb", "lib/snoopy_afip/core_ext/hash.rb", "lib/snoopy_afip/core_ext/string.rb", "lib/snoopy_afip/exceptions.rb", "lib/snoopy_afip/version.rb", "spec/snoopy_afip/authorizer_spec.rb", "spec/snoopy_afip/bill_spec.rb", "spec/spec_helper.rb", "wsaa-client.sh"]
+  s.homepage = "https://github.com/gedera/snoopy_afip"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.25"
+  # s.rubygems_version = "1.8.25"
   s.summary = "Adaptador AFIP wsfe."
-  s.test_files = ["spec/snoopy_afip/auth_data_spec.rb", "spec/snoopy_afip/authorizer_spec.rb", "spec/snoopy_afip/bill_spec.rb", "spec/spec_helper.rb"]
+  s.test_files = ["spec/snoopy_afip/authorizer_spec.rb", "spec/snoopy_afip/bill_spec.rb", "spec/spec_helper.rb"]
 
-  if s.respond_to? :specification_version then
-    s.specification_version = 3
-
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<savon>, ["= 2.4.0"])
-      s.add_development_dependency(%q<ruby-debug>, [">= 0"])
-      s.add_development_dependency(%q<ruby-debug-base19>, ["= 0.11.24"])
-      s.add_development_dependency(%q<ruby-debug19>, ["= 0.11.6"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.4.0"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.5.1"])
-      s.add_development_dependency(%q<rcov>, [">= 0"])
-      s.add_runtime_dependency(%q<nokogiri>, ["= 1.5.0"])
-      s.add_runtime_dependency(%q<wasabi>, ["~> 3.2.3"])
-      s.add_runtime_dependency(%q<akami>, ["~> 1.1"])
-      s.add_runtime_dependency(%q<nori>, ["~> 2.3.0"])
-    else
-      s.add_dependency(%q<savon>, ["= 2.4.0"])
-      s.add_dependency(%q<ruby-debug>, [">= 0"])
-      s.add_dependency(%q<ruby-debug-base19>, ["= 0.11.24"])
-      s.add_dependency(%q<ruby-debug19>, ["= 0.11.6"])
-      s.add_dependency(%q<rspec>, ["~> 2.4.0"])
-      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_dependency(%q<jeweler>, ["~> 1.5.1"])
-      s.add_dependency(%q<rcov>, [">= 0"])
-      s.add_dependency(%q<nokogiri>, ["= 1.5.0"])
-      s.add_dependency(%q<wasabi>, ["~> 3.2.3"])
-      s.add_dependency(%q<akami>, ["~> 1.1"])
-      s.add_dependency(%q<nori>, ["~> 2.3.0"])
-    end
-  else
-    s.add_dependency(%q<savon>, ["= 2.4.0"])
-    s.add_dependency(%q<ruby-debug>, [">= 0"])
-    s.add_dependency(%q<ruby-debug-base19>, ["= 0.11.24"])
-    s.add_dependency(%q<ruby-debug19>, ["= 0.11.6"])
-    s.add_dependency(%q<rspec>, ["~> 2.4.0"])
-    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-    s.add_dependency(%q<jeweler>, ["~> 1.5.1"])
-    s.add_dependency(%q<rcov>, [">= 0"])
-    s.add_dependency(%q<nokogiri>, ["= 1.5.0"])
-    s.add_dependency(%q<wasabi>, ["~> 3.2.3"])
-    s.add_dependency(%q<akami>, ["~> 1.1"])
-    s.add_dependency(%q<nori>, ["~> 2.3.0"])
-  end
+  s.add_runtime_dependency('savon', ["~> 2.12.0"])
+  s.add_runtime_dependency('nokogiri', ["~> 1.10.9"])
+  s.add_runtime_dependency('wasabi', ["~> 3.5.0"])
+  s.add_runtime_dependency('akami', ["~> 1.3.1"])
+  s.add_runtime_dependency('nori', ["~> 2.6.0"])
 end

@@ -1,23 +1,27 @@
+# coding: utf-8
 require "bundler/setup"
 require "snoopy_afip/version"
 require "snoopy_afip/constants"
+require "snoopy_afip/exceptions"
 require "savon"
 require "snoopy_afip/core_ext/float"
 require "snoopy_afip/core_ext/hash"
 require "snoopy_afip/core_ext/string"
+
 module Snoopy
-
-  class NullOrInvalidAttribute < StandardError; end
-
-  autoload :Authorizer,   "snoopy_afip/authorizer"
-  autoload :AuthData,     "snoopy_afip/auth_data"
-  autoload :Bill,         "snoopy_afip/bill"
-  autoload :Constants,    "snoopy_afip/constants"
-
+  autoload :Constants,             'snoopy_afip/constants'
+  autoload :Bill,                  'snoopy_afip/bill'
+  autoload :Client,                'snoopy_afip/client'
+  autoload :AuthorizeAdapter,      'snoopy_afip/authorize_adapter'
+  autoload :AuthenticationAdapter, 'snoopy_afip/authentication_adapter'
 
   extend self
-  attr_accessor :cuit, :sale_point, :service_url, :default_documento, :pkey, :cert,
-    :default_concepto, :default_moneda, :own_iva_cond, :verbose, :auth_url
+  attr_accessor :cuit, :sale_point, :service_url, :default_document_type, :pkey, :cert,
+    :default_concept, :default_currency, :own_iva_cond, :verbose, :auth_url,
+    :open_timeout, :read_timeout
+
+  self.open_timeout ||= 30
+  self.read_timeout ||= 30
 
   def auth_hash
     {"Token" => Snoopy::TOKEN, "Sign"  => Snoopy::SIGN, "Cuit"  => Snoopy.cuit}
@@ -50,9 +54,5 @@ module Snoopy
 
 #  Savon::Request.log = false unless (Snoopy.verbose == "true") || (ENV["VERBOSE"] == true)
 
-#  Savon.configure do |config|
-#    config.log = Snoopy.log?
-#    config.log_level = :debug
-#  end
-
 end
+
