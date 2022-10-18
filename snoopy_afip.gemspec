@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.test_files = ["spec/snoopy_afip/authorizer_spec.rb", "spec/snoopy_afip/bill_spec.rb", "spec/spec_helper.rb"]
 
   s.add_runtime_dependency('savon', ["~> 2.12.0"])
-  s.add_runtime_dependency('nokogiri', ["~> 1.10.9"])
+  s.add_runtime_dependency('nokogiri', ">= 1.10.9", "< 1.14.0")
   s.add_runtime_dependency('wasabi', ["~> 3.5.0"])
   s.add_runtime_dependency('akami', ["~> 1.3.1"])
   s.add_runtime_dependency('nori', ["~> 2.6.0"])
